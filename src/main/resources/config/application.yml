@@ -19,3 +19,9 @@ server:
 
 image:
   base-dir: /var/www/html
+
+logging:
+  level:
+    org.springframework: INFO
+    root: INFO
+  file.name: /app/logs/image-uploader.log
