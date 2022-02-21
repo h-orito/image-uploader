@@ -4,3 +4,18 @@ server:
     session:
       timeout: 86400
   port: 8080
+  tomcat:
+    use-relative-redirects: true
+    basedir: /app/logs/
+    accesslog:
+      enabled: true
+      suffix: .log
+      prefix: image-uploader-access_log
+      file-date-format: .yyyy-MM-dd
+      max-days: 30
+      pattern: '%t "%r" %s %b "%{Referer}i" "%{User-Agent}i" %{X-Forwarded-For}i %D %S %I'
+    remoteip.remote-ip-header: true
+    use-forward-headers: true
+
+image:
+  base-dir: /var/www/html
