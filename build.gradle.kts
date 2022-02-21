@@ -5,11 +5,15 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	kotlin("jvm") version "1.6.10"
 	kotlin("plugin.spring") version "1.6.10"
+	id("com.google.cloud.tools.jib") version "2.6.0"
 }
 
 group = "com.ort"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
+
+apply(plugin = "kotlin")
+apply(plugin = "io.spring.dependency-management")
 
 repositories {
 	mavenCentral()
@@ -32,4 +36,25 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+jib {
+	from {
+		image = "arm64v8/openjdk:11"
+		platforms {
+			platform {
+				architecture = "arm64"
+				os = "linux"
+			}
+		}
+	}
+	to {
+		image = "ghcr.io/h-orito/image-uploader"
+	}
+	container {
+		jvmFlags = listOf(
+			"-server", "-Djava.awt.headless=true"
+		)
+		creationTime = "USE_CURRENT_TIMESTAMP"
+	}
 }
