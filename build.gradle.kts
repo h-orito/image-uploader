@@ -26,7 +26,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	// jackson
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 tasks.withType<KotlinCompile> {
